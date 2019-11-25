@@ -1,4 +1,9 @@
-#### C++笔记
+
+
+### C++笔记
+
+只对Python比较熟好像不太好找工作的样子，所以从零开始，复习（学习！）C++，刷刷LeetCode，把一些基础或者重要的干货记录下来！脚踏实地，世界永远不够。
+附：基本参考菜鸟教程 https://www.runoob.com/cplusplus/cpp-tutorial.html 与 c++ Primer Plus(中文第六版)
 
 ##### 常用数据类型：
 
@@ -229,7 +234,6 @@ double *p;
 double balance[10];
 
 p = balance;
-
 ```
 
 使用数组名作为常量指针是合法的，反之亦然。因此，\*(balance + 4) 是一种访问 balance[4] 数据的合法方式。一旦把第一个元素的地址存储在 p 中，您就可以使用\*p、\*(p+1)、\*(p+2) 等来访问数组元素。
@@ -254,7 +258,6 @@ void myFunction(int param[]) //形式参数是一个未定义大小的数组
 .
 .
 }
-
 ```
 
 从函数返回数组
@@ -299,7 +302,6 @@ int main ()
  
    return 0;
 }
-
 ```
 
 ------
@@ -316,7 +318,6 @@ C 风格的字符实际上是使用 **null** 字符 '\0' 终止的一维字符�
 ```c++
 char greeting[6] = {'H', 'e', 'l', 'l', 'o', '\0'};
 char greeting[] = "Hello";
-
 ```
 
 C++ 中有大量的函数用来操作以 null 结尾的字符串：
@@ -357,7 +358,6 @@ int main ()
  
    return 0;
 }
-
 ```
 
 String 类
@@ -391,7 +391,6 @@ int main ()
  
    return 0;
 }
-
 ```
 
 ------
@@ -418,7 +417,6 @@ int main ()
  
    return 0;
 }
-
 ```
 
 **指针**是一个变量，其值为另一个**变量的地址**，即，内存位置的直接地址。就像其他变量或常量一样，必须在使用指针存储其他变量地址之前，对其进行声明。指针变量声明的一般形式为：
@@ -461,7 +459,6 @@ int main ()
    }
    return 0;
 }
-
 ```
 
 也可以将指针地址存入数组中，即所谓的指针数组：
@@ -474,7 +471,6 @@ int  var[MAX] = {10, 100, 200};
    {
       ptr[i] = &var[i]; // 赋值为整数的地址
    }
-
 ```
 
 C++ 允许从函数返回指针。必须在定义函数时声明这是一个返回指针的函数，如下所示：
@@ -484,7 +480,6 @@ int * myFunction()
 {
 ...
 }
-
 ```
 
 ------
@@ -500,7 +495,6 @@ int * myFunction()
 ```c++
 int&  r = i;
 double& s = d;
-
 ```
 
 C++之所以增加引用类型， 主要是把它作为函数参数，以扩充函数传递数据的功能。
@@ -540,7 +534,6 @@ void swap(int& x, int& y)
   
    return;
 }
-
 ```
 
 ------
@@ -586,7 +579,6 @@ struct tm {
   int tm_isdst; // 夏令时
 }
 */
-
 ```
 
 ------
@@ -610,7 +602,6 @@ struct Books
    char  subject[100];
    int   book_id;
 } book;
-
 ```
 
 实例：
@@ -649,7 +640,6 @@ int main( )
  
    return 0;
 }
-
 ```
 
 也可以把结构作为函数参数，传参方式与其他类型的变量或指针类似。
@@ -658,21 +648,18 @@ int main( )
 
 ```c++
 struct Books *struct_pointer;
-
 ```
 
 现在，可以在上述定义的指针变量中存储结构变量的地址。为了查找结构变量的地址，需要把 & 运算符放在结构名称的前面，如下所示：
 
 ```c++
 struct_pointer = &Book1;
-
 ```
 
 为了使用指向该结构的指针访问结构的成员，必须使用 -> 运算符，如下所示：
 
 ```c++
 struct_pointer->title;
-
 ```
 
 可以使用typedef 更简单地定义结构
@@ -687,6 +674,204 @@ typedef struct Books
 }Books;
 // 这样直接可以用Books 定义结构
 Books Book1, Book2;
-
 ```
+
+------
+
+##### 类 & 对象
+
+定义一个类，本质上是定义一个数据类型的蓝图。这实际上并没有定义任何数据，但它定义了类的名称意味着什么，也就是说，它定义了类的对象包括了什么，以及可以在这个对象上执行哪些操作。类的定义如下：
+
+```c++
+class Box
+{
+   public:
+      double length;   // 盒子的长度
+      double breadth;  // 盒子的宽度
+      double height;   // 盒子的高度
+};
+
+Box Box1;          // 声明 Box1，类型为 Box
+Box Box2;          // 声明 Box2，类型为 Box
+
+// box 1 详述
+Box1.height = 5.0; 
+Box1.length = 6.0; 
+Box1.breadth = 7.0;
+ 
+// box 1 的体积
+volume = Box1.height * Box1.length * Box1.breadth;
+```
+
+关键字 **public** 确定了类成员的访问属性。类的对象的公共数据成员可以使用直接成员访问运算符 (.) 来访问。
+
+**类成员函数**
+
+类的成员函数是指那些把定义和原型写在类定义内部的函数，就像类定义中的其他变量一样。类成员函数是类的一个成员，它可以操作类的任意对象，可以访问对象中的所有成员。
+
+```c++
+class Box
+{
+   public:
+      double length;      // 长度
+      double breadth;     // 宽度
+      double height;      // 高度
+   
+      double getVolume(void)
+      {
+         return length * breadth * height;
+      }
+      // 成员函数声明 double getVolume(void);
+};
+/*
+double Box::getVolume(void)
+{
+    return length * breadth * height;
+}
+*/
+Box Box1;                // 声明 Box1，类型为 Box
+v = Box1.getVolume();    // 计算Box1的体积
+```
+
+**类访问修饰符**
+
+数据封装是面向对象编程的一个重要特点，它防止函数直接访问类类型的内部成员。类成员的访问限制是通过在类主体内部对各个区域标记 **public、private、protected** 来指定的。关键字 **public、private、protected** 称为访问修饰符。代码中没有声明的，默认为**private**成员。
+
+```c++
+class Base {
+   public:
+  // 公有成员
+   protected:
+  // 受保护成员
+   private:
+  // 私有成员
+};
+```
+
+public成员在程序中类的外部是可访问的。您可以不使用任何成员函数来设置和获取公有变量的值，
+
+private成员变量或函数在类的外部是不可访问的，甚至是不可查看的。只有类和友元函数可以访问私有成员。
+
+protected成员变量在派生类（即子类）中是可访问的，
+
+**类的构造函数**
+
+类的**构造函数**是类的一种特殊的成员函数，它会在每次创建类的新对象时执行。
+
+构造函数的名称与类的名称是完全相同的，并且不会返回任何类型，也不会返回 void。构造函数可用于为某些成员变量设置初始值。
+
+```c++
+class Line
+{
+   public:
+      void setLength( double len );
+      double getLength( void );
+      Line(double len);  // 这是构造函数
+ 
+   private:
+      double length;
+};
+ 
+// 成员函数定义，包括构造函数
+Line::Line( double len)
+{
+    cout << "Object is being created, length = " << len << endl;
+    length = len;
+}
+
+// 程序的主函数
+int main( )
+{
+   Line line(10.0);
+   return 0;
+}
+```
+
+假设有一个类 C，具有多个字段 X、Y、Z 等需要进行初始化，同理地，您可以使用上面的语法，只需要在不同的字段使用逗号进行分隔，如下所示：
+
+```c++
+C::C( double a, double b, double c): X(a), Y(b), Z(c)
+{
+  ....
+}
+```
+
+**类的析构函数**
+
+类的**析构函数**是类的一种特殊的成员函数，它会在每次删除所创建的对象时执行。 
+
+析构函数的名称与类的名称是完全相同的，只是在前面加了个波浪号（~）作为前缀，它不会返回任何值，也不能带有任何参数。析构函数有助于在跳出程序（比如关闭文件、释放内存等）前释放资源。
+
+```c++
+Line::~Line(void)
+{
+    cout << "Object is being deleted" << endl;
+}
+```
+
+**友元函数**
+
+类的友元函数是定义在类外部，但有权访问类的所有私有（private）成员和保护（protected）成员。
+
+```c++
+class Box
+{
+   double width;
+public:
+   double length;
+   friend void printWidth( Box box );
+   void setWidth( double wid );
+};
+```
+
+再定义void printWidth( Box box );函数可以直接访问width变量。
+
+**内联函数**
+
+通常与类一起使用。如果一个函数是内联的，那么在编译时，编译器会把该函数的代码副本放置在每个调用该函数的地方。引入内联函数的目的是为了解决程序中函数调用的效率问题，程序在编译器编译的时候，编译器将程序中出现的内联函数的调用表达式用内联函数的函数体进行替换，而对于其他的函数，都是在运行时候才被替代。这其实就是个空间代价换时间的i节省。所以内联函数一般都是1-5行的小函数。在使用内联函数时要留神：
+
+- 在内联函数内不允许使用循环语句和开关语句；
+- 内联函数的定义必须出现在内联函数第一次调用之前；
+- 类结构中所在的类说明内部定义的函数是内联函数。
+
+**this 指针**
+
+在 C++ 中，每一个对象都能通过 **this** 指针来访问自己的地址。**this** 指针是所有成员函数的隐含参数。因此，在成员函数内部，它可以用来指向调用对象。因此，在成员函数内部，它可以用来指向调用对象。友元函数没有 **this** 指针，因为友元不是类的成员。只有成员函数才有 **this** 指针。
+
+```c++
+class Box
+{
+...
+      int compare(Box box)
+      {
+         return this->Volume() > box.Volume();
+      }
+...
+};
+// this 就是指自己对象
+```
+
+**指向类的指针**
+
+访问指向类的指针的成员(包括函数)，需要使用成员访问运算符 **->**。
+
+```c++
+Box Box1(3.3, 1.2, 1.5);    // Declare box1
+Box Box2(8.5, 6.0, 2.0);    // Declare box2
+Box *ptrBox;                // Declare pointer to a class.
+
+// 保存第一个对象的地址
+ptrBox = &Box1;
+cout << ptrBox->Volume() << endl;
+```
+
+**类的静态成员**
+
+可以使用 **static** 关键字来把类成员定义为静态的。当我们声明类的成员为静态时，这意味着无论创建多少个类的对象，静态成员都只有一个副本。静态成员在类的所有对象中是共享的。
+
+如果把函数成员声明为静态的，就可以把函数与类的任何特定对象独立开来。静态成员函数即使在类对象不存在的情况下也能被调用，**静态函数**只要使用类名加范围解析运算符 **::** 就可以访问。
+
+------
+
+**继承**
 
