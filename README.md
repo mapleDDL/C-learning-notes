@@ -4,6 +4,6 @@
 
 本项目的主要内容如下
 
-1. [leetcode刷题记录](../leetcode_cpp)
+1. [leetcode刷题记录](https://github.com/mapleDDL/Cpp-learning-notes/tree/master/leetcode_cpp)
 2. C++小型练手项目
 3. C++学习资料
