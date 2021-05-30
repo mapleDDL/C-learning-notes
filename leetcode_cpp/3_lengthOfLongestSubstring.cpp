@@ -1,6 +1,7 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
+        // 滑动窗口
         if (s.length() <= 1) {
             return s.length();
         } 
